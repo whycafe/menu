@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHY Cafe — Menu</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --cream: #F7F3EC;
+            --dark: #1C1A17;
+            --warm: #8B6F47;
+            --accent: #C4973A;
+            --light-warm: #EDE4D3;
+            --text-muted: #7A6E62;
+            --divider: rgba(139, 111, 71, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--cream);
+            color: var(--dark);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            min-height: 100vh;
+        }
+
+        header {
+            background: var(--dark);
+            color: var(--cream);
+            text-align: center;
+            padding: clamp(1.75rem, 5vw, 3rem) clamp(1rem, 4vw, 2rem) clamp(1.5rem, 4vw, 2.5rem);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(196, 151, 58, 0.15) 0%, transparent 70%);
+        }
+
+        .logo-tag {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 12vw, 7rem);
+            font-weight: 700;
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+            position: relative;
+        }
+
+        .tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1rem;
+            color: rgba(247, 243, 236, 0.55);
+            margin-top: 0.75rem;
+            position: relative;
+        }
+
+        nav {
+            display: flex;
+            justify-content: flex-start;
+            gap: 0;
+            background: var(--light-warm);
+            border-bottom: 1px solid var(--divider);
+            overflow-x: auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            padding: 0.9rem 1.1rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            cursor: pointer;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+            flex-shrink: 0;
+        }
+
+        nav button.active,
+        nav button:hover {
+            color: var(--dark);
+            border-bottom-color: var(--accent);
+        }
+
+        .menu-section {
+            display: none;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .menu-section.active {
+            display: block;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 400;
+        }
+
+        .section-header .line {
+            flex: 1;
+            height: 1px;
+            background: var(--divider);
+        }
+
+        .section-desc {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            margin-top: -1.25rem;
+            font-style: italic;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
+        .menu-item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1rem;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--divider);
+            align-items: start;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+        }
+
+        .item-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .item-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 2px 7px;
+            border-radius: 20px;
+            margin-right: 4px;
+            margin-top: 0.4rem;
+        }
+
+        .tag-vegan {
+            background: #E6F3DC;
+            color: #3B6D11;
+        }
+
+        .tag-new {
+            background: #FAEEDA;
+            color: #854F0B;
+        }
+
+        .tag-popular {
+            background: #FBEAF0;
+            color: #993556;
+        }
+
+        .tag-seasonal {
+            background: #E1F5EE;
+            color: #0F6E56;
+        }
+
+        .item-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--warm);
+            white-space: nowrap;
+            padding-top: 2px;
+        }
+
+        .subsection-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin: 2rem 0 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--divider);
+        }
+
+        .subsection-label:first-child {
+            margin-top: 0;
+        }
+
+        footer {
+            background: var(--dark);
+            color: var(--cream);
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+        }
+
+        .footer-info {
+            font-size: 0.8rem;
+            color: rgba(247, 243, 236, 0.5);
+            line-height: 2;
+            margin-bottom: 2rem;
+        }
+
+        .qr-section {
+            display: inline-block;
+            background: white;
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .qr-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--dark);
+            margin-top: 0.75rem;
+        }
+
+        #qr-canvas {
+            display: block;
+        }
+
+        .footer-tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: rgba(247, 243, 236, 0.35);
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 480px) {
+            .menu-section {
+                padding: 2.5rem 1.5rem;
+            }
+
+            nav button {
+                padding: 1rem 1.25rem;
+            }
+        }
+
+        @media (min-width: 600px) {
+            .menu-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0 3rem;
+            }
+
+            .menu-item {
+                border-bottom: 1px solid var(--divider);
+            }
+
+            .menu-section {
+                padding: 3rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+
+            .tagline {
+                font-size: 0.85rem;
+            }
+
+            .logo-tag {
+                font-size: 10px;
+                letter-spacing: 0.15em;
+            }
+
+            header {
+                padding: 2rem 1rem 1.75rem;
+            }
+
+            nav button {
+                padding: 0.8rem 0.8rem;
+                font-size: 0.7rem;
+                letter-spacing: 0.07em;
+            }
+
+            .item-name {
+                font-size: 0.95rem;
+            }
+
+            .item-price {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 599px) {
+            .menu-item {
+                padding: 1rem 0;
+                gap: 0.75rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .footer-info {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <p class="logo-tag">Est. 2021</p>
+        <h1>WHY</h1>
+        <p class="tagline">because every cup deserves a reason</p>
+    </header>
+
+    <nav id="nav">
+        <button class="active" data-tab="coffee">Coffee</button>
+        <button data-tab="drinks">Drinks</button>
+        <button data-tab="qr">Scan & Share</button>
+    </nav>
+
+    <section class="menu-section active" id="coffee">
+        <div class="section-header">
+            <h2>Coffee</h2>
+            <div class="line"></div>
+        </div>
+        <p class="section-desc">Savor the rich heritage of Lavazza at our cafe. From bold, velvety espressos to perfectly frothy lattes, we brew Italy’s
+        finest beans to deliver a premium coffee experience in every cup.</p>
+
+        <div class="subsection-label">Espresso Bar</div>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Espresso</div>
+                    <div class="item-desc">short, medium, long</div>
+                </div>
+                <div class="item-price">90 MKD</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Americano</div>
+                    <div class="item-desc">Espresso stretched with hot water</div>
+                </div>
+                <div class="item-price">90 MKD</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Big Macchiato</div>
+                    <div class="item-desc">A double-shot boost with an extra cloud of velvety froth.</div>
+                    <div><span class="item-tag tag-popular">popular</span></div>
+                </div>
+                <div class="item-price">120 MKD</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Small Macchiato</div>
+                    <div class="item-desc">A single shot of intense espresso tempered by a touch of foam.</div>
+                </div>
+                <div class="item-price">100 MKD</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Cappuccino</div>
+                    <div class="item-desc">Equal parts espresso, steamed milk & foam</div>
+                </div>
+                <div class="item-price">130 MKD</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Latte</div>
+                    <div class="item-desc">Smooth, creamy, long</div>
+                </div>
+                <div class="item-price">150 MKD</div>
+            </div>
+        </div>
+
+        <div class="subsection-label">Hot Drinks</div>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Hot Chocolate</div>
+                    <div class="item-desc">Dark chocolate, Strawberry, White chocolate</div>
+                    <div><span class="item-tag tag-popular">popular</span></div>
+                </div>
+                <div class="item-price">160 MKD</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Tea</div>
+                    <div class="item-desc">Select from our variety of loose-leaf and bagged teas</div>
+                </div>
+                <div class="item-price">100 MKD</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="menu-section" id="drinks">
+        <div class="section-header">
+            <h2>Other Drinks</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="subsection-label">Non-alcoholic Drinks</div>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Monin Lemonade</div>
+                    <div class="item-desc">Fresh lemon, mint, flavour of your choice</div>
+                    <div><span class="item-tag tag-vegan">vegan</span><span class="item-tag tag-popular">popular</span>
+                    </div>
+                </div>
+                <div class="item-price">150 MKD</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Fresh Lemonade</div>
+                    <div class="item-desc">Pressed to order</div>
+                </div>
+                <div class="item-price">190 MKD</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Fresh Orange Juice</div>
+                    <div class="item-desc">Pressed to order</div>
+                </div>
+                <div class="item-price">190 MKD</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Fresh Mix</div>
+                    <div class="item-desc">A refreshing blend of fresh lemon and orange</div>
+                </div>
+                <div class="item-price">200 MKD</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Sodas</div>
+                    <div class="item-desc">Coca-Cola, Sprite, Fanta, Shweppes</div>
+                </div>
+                <div class="item-price">110 MKD</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Juice</div>
+                    <div class="item-desc">Apple, Orange, Forest fruits, Peach</div>
+                </div>
+                <div class="item-price">130 MKD</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Still / Sparkling Water</div>
+                    <div class="item-desc">500ml bottle</div>
+                </div>
+                <div class="item-price">90 MKD</div>
+            </div>
+        </div>
+
+        <div class="subsection-label">Cocktails</div>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Martini</div>
+                    <div class="item-desc">Made with premium vodka and fresh ingredients</div>
+                </div>
+                <div class="item-price">200 MKD</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Sex on the Beach</div>
+                    <div class="item-desc">A tropical blend of vodka, triple sec, and fruit juices</div>
+                </div>
+                <div class="item-price">220 MKD</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Blue Lagoon</div>
+                    <div class="item-desc">A refreshing blend of blue curaçao, vodka, and fruit juices</div>
+                </div>
+                <div class="item-price">220 MKD</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Blue Hawaii</div>
+                    <div class="item-desc">A tropical blend of rum, pineapple juice, and coconut cream</div>
+                </div>
+                <div class="item-price">220 MKD</div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="menu-section" id="qr">
+        <div class="section-header">
+            <h2>Scan & Share</h2>
+            <div class="line"></div>
+        </div>
+        <p class="section-desc">Share this menu with friends or display at your table.</p>
+
+        <div style="text-align:center; padding: 2rem 0;">
+            <div
+                style="display:inline-block; background:white; border-radius:16px; padding:1.5rem; box-shadow: 0 2px 20px rgba(28,26,23,0.08);">
+                <canvas id="qr-main" width="200" height="200"></canvas>
+                <div
+                    style="margin-top:1rem; font-size:0.75rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted);">
+                    WHY Cafe — Full Menu</div>
+            </div>
+            <p
+                style="margin-top:1.5rem; font-size:0.85rem; color:var(--text-muted); max-width:300px; margin-left:auto; margin-right:auto; line-height:1.7;">
+                Print this page and display it at your tables, or share the link with customers.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-info">
+            Mon – Sun: 8am – 12pm &nbsp;·&nbsp; Fri – Sat: 8am – 1am<br>
+            Mitropolit Teodosij Gologanov 134/1, Skopje 1000<br>
+            Instagram &nbsp;·&nbsp; @whycaffe
+        </div>
+        <div class="qr-section">
+            <canvas id="qr-canvas" width="120" height="120"></canvas>
+            <div class="qr-label">Scan for menu</div>
+        </div>
+        <p class="footer-tagline">Good coffee.  No bad reasons.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        const tabs = document.querySelectorAll('nav button');
+        const sections = document.querySelectorAll('.menu-section');
+
+        tabs.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabs.forEach(b => b.classList.remove('active'));
+                sections.forEach(s => s.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+            });
+        });
+
+        const menuUrl = window.location.href;
+
+        new QRCode(document.getElementById('qr-canvas'), {
+            text: menuUrl,
+            width: 120,
+            height: 120,
+            colorDark: '#1C1A17',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.M
+        });
+
+        new QRCode(document.getElementById('qr-main'), {
+            text: menuUrl,
+            width: 200,
+            height: 200,
+            colorDark: '#1C1A17',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.M
+        });
+    </script>
+</body>
+
+</html>
